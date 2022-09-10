@@ -1,0 +1,532 @@
+@import './mixins';
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+$trashIconSize: 16px;
+$borderRadius: 0.6rem;
+$svgSizes: 1.5rem;
+
+$forestGreen: #315343;
+
+body {
+    position: relative;
+    background-image: linear-gradient(45deg, #fbfff9, #ecf7e8);
+    // background-color: #f0f0f0;
+    background-color: #ecf7e8;
+}
+
+// Login/register 
+.page {
+    @include shaped();
+    background-color: #ffffff;
+    padding: 1.5rem;
+    width: 90%;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+
+    h2 {
+        margin-bottom: 1.5rem;
+    }
+
+    input {
+        margin: 1rem 0;
+    }
+
+    .log-reg-btn {
+        @include shaped();
+        margin-left: 50%;
+        transform: translate(-50%, -25%);
+    }
+
+    #message {
+        color: #d80000;
+    }
+}
+
+// Buttons
+button {
+    @include shaped();
+    border: none;
+}
+
+.btn {
+    // background-color: whitesmoke;
+    background-color: $forestGreen;
+    color: #ffffff;
+    border-radius: 1.5rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+
+    &:hover {
+        box-shadow: 3px 3px 5px gray;
+        color: #ffffff;
+    }
+
+    &:focus {
+        box-shadow: 3px 3px 5px lightgray;
+        color: #ffffff;
+    }
+
+}
+
+.log-btn {
+    box-shadow: none;
+    font-weight: 500;
+    border-radius: 0%;
+    background-color: transparent;
+    margin: 2rem 0 0 1rem;
+    // border-left: 0.2rem solid rgba(0, 0, 0, 0.75);
+    border-left: 0.2rem solid $forestGreen;
+    color: $forestGreen;
+
+    &:hover {
+        border-radius: $borderRadius;
+        border: 0.2rem solid $forestGreen;
+        color: $forestGreen;
+    }
+}
+
+.invisible-btn {
+    background-color: transparent;
+    box-shadow: none;
+
+}
+
+svg {
+    width: 16px;
+    height: 16px;
+}
+
+// List
+ul {
+    list-style: none;
+}
+
+// Favorites div
+#favorites-div {
+    @include center-content-right();
+    @include scrollbar();
+    height: 1rem;
+
+    #double-bookmark-icon {
+        position: relative;
+        bottom: 150%;
+        right: 0.8rem;
+    }
+
+    #close-icon,
+    #double-bookmark-cbox,
+    #favoritesList li {
+        display: none;
+    }
+
+    #favoritesList {
+        @include shaped();
+        background-color: white;
+        position: absolute;
+        left: 50%;
+        top: 40%;
+        transform: translate(-50%, -50%);
+    }
+
+    // Show  favorites on user click
+    #double-bookmark-cbox:checked~#favoritesList-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(#000000, 0.5);
+
+        #close-icon {
+            display: block;
+            position: absolute;
+            top: 1.3rem;
+            right: 1.3rem;
+            background-color: transparent;
+
+            svg {
+                fill: white;
+                width: 1.3rem;
+                height: 1.3rem;
+            }
+
+        }
+
+        #favoritesList {
+            padding: 1rem 1.5rem;
+
+            li {
+                display: flex;
+                max-width: 100%;
+                padding: 0.2rem 0;
+                border-bottom: 1px solid lightgray;
+
+                .insert-btn {
+                    display: flex;
+                    justify-content: left;
+                    width: calc(100% - 16px);
+                }
+
+                &:first-child,
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+
+    }
+
+    #double-bookmark-cbox:checked~#double-bookmark-icon {
+        visibility: hidden;
+    }
+
+    #close-icon,
+    #double-bookmark-cbox {
+        display: none
+    }
+
+}
+
+// Calculator
+#page {
+    @include shaped();
+    margin: 1rem 0 1rem 0;
+    padding: 2rem 1rem 1rem;
+    background-color: #ffffff;
+
+    // Top
+    #tickerInput {
+        @include flex-center();
+
+        input {
+            border-radius: 0.2rem;
+            border: 1px solid lightgray;
+
+            &:focus {
+                outline: none;
+                border: 1px solid gray;
+            }
+        }
+
+        #search-btn-div {
+            @include flex-center();
+        }
+
+        #search-btn-div {
+            margin: 1rem 0;
+        }
+
+        hr {
+            max-width: 50%;
+            color: rgb(169, 169, 169);
+        }
+
+        button,
+        input,
+        #add-favorites-btn {
+            width: auto;
+        }
+    }
+
+    // Body
+    #dataInput {
+        .splitted {
+            width: 100%;
+        }
+
+        .strong {
+            font-weight: 600;
+            color: $forestGreen;
+        }
+
+        input {
+            margin-left: 10%;
+            width: 85%;
+
+            border: transparent;
+            border-bottom: 2px solid lightgray;
+
+            &:focus {
+                outline: none;
+                border: transparent;
+                border-bottom: 2px solid gray;
+            }
+
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            &[type=number] {
+                -moz-appearance: textfield;
+            }
+        }
+
+        @include flex-center();
+
+        div {
+            width: auto;
+            margin-bottom: 0.8rem;
+        }
+
+        #calculate-btn-div {
+            @include flex-center();
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+
+        .splitted {
+            margin: 0;
+        }
+    }
+
+    // Bottom 
+    #result {
+        display: flex;
+        justify-content: center;
+        padding: 1rem 0;
+        margin: 1rem;
+        line-height: 1.8rem;
+        @include shaped();
+
+        #intrinsicValueDiv {
+            width: auto;
+            font-size: large;
+
+            #intrinsicValue {
+                text-align: center;
+                font-size: larger;
+                font-weight: 500;
+            }
+
+        }
+
+        #rated {
+            display: block;
+            text-align: center;
+            font-size: x-large;
+            font-weight: 600;
+        }
+
+        #price {
+            display: block;
+            text-align: center;
+        }
+    }
+}
+
+// Documentation
+#documentation-div {
+    display: none;
+}
+
+// Bigger screens
+@media (min-width: 576px) {
+
+    // Login/register
+    .page {
+        max-width: 45rem;
+
+        input {
+            // max-width: 20rem;
+            width: 70%;
+            margin: 2rem auto;
+        }
+
+        .log-reg-btn {
+            width: max-content;
+        }
+    }
+
+    #body-div {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        height: 100vh;
+        width: 100%;
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        z-index: -1;
+    }
+
+    // Log Button
+    .log-btn {
+        // border-left: 0.2 solid rgb(240, 240, 240);
+        margin: 2.5rem 0 0 4rem;
+        border-width: .2rem;
+        border-color: transparent;
+
+        &:hover {
+            border-radius: 0%;
+            box-shadow: none;
+            border-color: transparent;
+            border-left: .2rem solid rgba(#000000, 0.75);
+        }
+    }
+
+    // Favorites
+    #favorites-div {
+        @include flex-center();
+        height: auto;
+
+        #favoritesList {
+            display: block;
+            position: relative;
+            padding: 1.5rem 2rem;
+            max-height: 60vh;
+            overflow-y: auto;
+
+            li {
+                display: flex;
+                max-width: 100%;
+                padding: 0.4rem 0;
+                border-bottom: 1px solid lightgray;
+
+                .insert-btn {
+                    display: flex;
+                    justify-content: left;
+                    width: calc(100% - 16px);
+                }
+
+                &:first-child,
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+        }
+
+    }
+
+    // Calculator
+    .col-xs-12 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        #page {
+            width: 75%;
+            padding: 2rem;
+
+            #dataInput {
+                margin: 1rem 0;
+
+                .splitted {
+                    display: grid;
+                    justify-content: center;
+
+                    @media (min-width: 1200px) {
+                        width: 50%;
+                    }
+
+                    columns: 1;
+
+                    div {
+                        width: 100%;
+                    }
+
+                    label {
+                        margin-left: -2rem;
+                    }
+
+                    input {
+                        width: 110%;
+                    }
+                }
+            }
+
+            #result {
+                margin: 1rem 0 0 50%;
+                transform: translateX(-50%);
+                width: 90%;
+
+                @media (min-width: 1200px) {
+                    width: 20rem;
+                }
+            }
+        }
+
+    }
+
+    // Documentation
+    #documentation-div {
+        display: block;
+        // position: absolute;
+        // top: 0;
+
+        svg {
+            width: $svgSizes;
+            height: $svgSizes;
+        }
+
+        #documentation-btn {
+            position: fixed;
+            left: 3rem;
+            bottom: 3rem;
+            background-color: transparent;
+            box-shadow: none;
+            border-top: .2rem solid inherit;
+            border-radius: 0%;
+
+            &:hover {
+                border-top: .2rem solid rgba($forestGreen, 0.75);
+            }
+
+            svg {
+                fill: $forestGreen;
+            }
+
+            @media (min-width: 1200px) {
+                left: 5rem;
+                bottom: 3rem;
+            }
+        }
+
+        #documentation-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #documentation-page {
+            @include shaped();
+            @include scrollbar();
+            height: 95vh;
+            background-color: white;
+            color: #000000;
+            padding: 2rem 3rem 1rem;
+            overflow-y: auto;
+        }
+
+        #close-documentation {
+            display: block;
+            position: absolute;
+            z-index: 1;
+            background-color: transparent;
+            top: 2rem;
+            right: 2.5rem;
+
+            svg {
+                fill: #f5f5f5;
+            }
+        }
+
+        #credits {
+            text-align: center;
+
+            #logo {
+                width: 2rem;
+                height: 2rem;
+                display: inline-block;
+            }
+        }
+
+    }
+
+}
