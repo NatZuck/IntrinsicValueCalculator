@@ -325,6 +325,7 @@ class Calculator extends React.Component {
                         
                         console.log("Setting state...");
                         this.setState({
+                            ticker: ticker,
                             freeCashFlow: freeCashFlow,
                             sharesOutstanding: sharesOutstanding,
                             marketCapitalization: marketCap,
